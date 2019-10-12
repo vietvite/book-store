@@ -9,9 +9,11 @@ public class BookBEAN {
 	private Long coverPrice;
 	private Long price;
 	private Integer quantity;
+	private String imageUrl;
+	
 	
 	public BookBEAN(String id, String bookName, String author, String description, String categoryId, Long coverPrice,
-			Long price, Integer quantity) {
+			Long price, Integer quantity, String imageUrl) {
 		super();
 		this.id = id;
 		this.bookName = bookName;
@@ -21,6 +23,8 @@ public class BookBEAN {
 		this.coverPrice = coverPrice;
 		this.price = price;
 		this.quantity = quantity;
+		this.imageUrl = imageUrl;
+		
 	}
 
 	public String getId() {
@@ -85,5 +89,13 @@ public class BookBEAN {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }
