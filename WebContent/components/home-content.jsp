@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@page import="Bean.BookBEAN"%>
+<%@page import="Bo.BookBO"%>
+<div class="mt-5">
+
+<!-- @foreach($booksGroupByCategory as $category) -->
+<%-- <% for() { %> --%>
+  <a href="#" class="text-decoration-none"><h2 class="h2 d-inline pr-1 pr-md-3 text-dark">Thể loại</h2></a>
+  <a href="#"><button class="btn btn-sm btn-light text-primary border-0 mt-n2">Xem thêm</button></a>
+  <hr>
+  <div class="row">
+    <%
+    BookBO bookBo = new BookBO();
+    %>
+    <% for(BookBEAN book: bookBo.getBooks()) { %>
+    <div class="col-12 col-md-3 pb-1 pb-md-3">
+       <div class="hover-shadow card border-0" style="width: 15rem;">
+        <a href="<%= book.getId() %>" class="text-decoration-none text-dark">
+          <img src="../<%= book.getImageUrl() %>" class="card-img-top" alt="img">
+          <div class="card-body text-center pt-0">
+            <h6 class="card-title mb-1" title="<%= book.getBookName() %>"><%= book.getBookName() %></h6>
+            <p class="mb-1 text-muted"><%= book.getAuthor() %></p>
+            <p class="text-muted d-inline align-top" style="text-decoration: line-through; font-size: 0.75rem"><%= book.getCoverPrice() %> đ</p>
+            <!-- <p class="font-weight-bold d-inline pl-2 pl-md-4">{{ round((($book->price - $book->coverPrice)/$book->coverPrice)*100) }}%</p> -->
+            <p class="font-weight-bold d-inline pl-2 pl-md-4">20%</p>
+
+            <p class="text-danger font-weight-bold mb-1"><%= book.getPrice() %> đ</p>
+          </div>
+          </a>
+       </div>
+    </div>
+    <% } %>
+  </div>
+<%-- <% } %> --%>
+
+</div>
