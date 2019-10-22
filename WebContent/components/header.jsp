@@ -27,6 +27,8 @@
   <div class="collapse navbar-collapse flex-grow-0" id="account">
     <div class="pl-md-3 my-3 my-md-0 text-center">
       <button class="btn btn-sm btn-light font-weight-bold border-0"><i class="fas fa-user-circle"></i> Tài khoản</button>
+      <!-- <button class="btn btn-sm btn-light font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng nhập</button>
+      <button class="btn btn-sm btn-light font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng ký</button> -->
     </div>
   </div>
 </nav>

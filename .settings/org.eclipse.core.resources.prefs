@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/components/categorySection.jsp=UTF-8
 encoding//WebContent/components/header.jsp=UTF-8
-encoding//WebContent/components/home-content.jsp=UTF-8
 encoding//WebContent/components/navbar.jsp=UTF-8
+encoding//src/Dao/BookDAO.java=UTF-8

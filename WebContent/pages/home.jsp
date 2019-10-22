@@ -22,7 +22,7 @@
     <div class="px-3">
       <%@include file="../components/carousel.jsp" %>
       
-      <%@include file="../components/home-content.jsp" %>
+      <%@include file="../components/categorySection.jsp" %>
     </div>
 
     <footer class="py-4 border-top">

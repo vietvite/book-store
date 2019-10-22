@@ -11,7 +11,9 @@ public class BookBEAN {
 	private Integer quantity;
 	private String imageUrl;
 	
-	
+	public BookBEAN() {
+	}
+
 	public BookBEAN(String id, String bookName, String author, String description, String categoryId, Long coverPrice,
 			Long price, Integer quantity, String imageUrl) {
 		super();
