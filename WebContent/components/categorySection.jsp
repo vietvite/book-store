@@ -27,8 +27,8 @@
             <p class="font-weight-bold d-inline pl-2 pl-md-4">20%</p>
 
             <p class="text-danger font-weight-bold mb-1"><%= book.getPrice() %> đ</p>
-            <a href="addcart.jsp?id=<%= book.getId() %>&bookname=<%= book.getBookName() %>&price=<%= book.getPrice() %> " class="btn btn-danger btn-sm"><i class="px-2 fas fa-plus"></i></a>
-            <a href="#" class="btn btn-danger btn-sm"><i class="px-2 fas fa-shopping-cart"></i></a>
+            <a href="addcart.jsp?id=<%= book.getId() %>&bookname=<%= book.getBookName() %>&price=<%= book.getPrice() %>&imageUrl=<%= book.getImageUrl() %>" class="btn btn-danger btn-sm"><i class="px-2 fas fa-shopping-cart"></i></a>
+            <a href="#" class="btn btn-danger btn-sm"><i class="px-2 fas fa-plus"></i></a>
           </div>
           </a>
        </div>

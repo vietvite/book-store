@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" integrity="sha256-zmfNZmXoNWBMemUOo1XUGFfc0ihGGLYdgtJS3KCr/l0=" crossorigin="anonymous" />
 </head>
-<body>
+<body class="bg-light">
 
 <div class="container">
     <div class="sticky-top">
@@ -19,21 +19,59 @@
     </div>
 
     <div class="px-3">
-    <a href="processCart.jsp?op=deleteall" class="d-flex justify-content-end"><button>Xóa hết</button></a>
-    <hr>
-      <%
-		if(session.getAttribute("cart") != null) {
+    <h2 class="mb-3">Giỏ hàng</h2>
+    <div class="row">
+    	<div class="col-md-9">
+    	<% if(session.getAttribute("cart") != null) {
 			CartBO cart = (CartBO) session.getAttribute("cart");
 		%>
-			<%for(CartBEAN g: cart.cartList) {  %>
-				<div class="d-flex justify-content-between">
-					<p class="d-inline-block"><%= g.getBookId() + " - " + g.getBookName() + " - " + g.getPrice() + " - " + g.getQuantity() %></p>
-					<a href="processCart.jsp?op=down1&bookId=<%= g.getBookId()%>" class=""><button>Giảm 1</button></a>
+			<% for(CartBEAN g: cart.cartList) {  %>
+			<div class="d-flex justify-content-between bg-white p-4 ml-n3 mb-3">
+				<div class="d-flex flex-col">
+					<img style="width: 26%;" alt="bookimg" src="../<%= g.getImageUrl() %>">
+					<div>
+						<h5><%= g.getBookName() %></h5>
+						<p class="text-danger"><%= String.format("%,d", g.getPrice()).replace(',', '.') %>đ</p>
+					</div>
 				</div>
-				<hr>
-			<%}
-		}
-		%>
+				
+				<div class="d-flex flex-row">
+					<h5 class="mr-4"><%= String.format("%,d", g.getTotalPrice()).replace(',', '.') %>đ</h5>
+					<div style="width: 78px;">
+						<div class="input-group input-group-sm">
+						  <div class="input-group-prepend">
+					    	<a class="btn btn-outline-secondary" href="processCart.jsp?op=down1&bookId=<%= g.getBookId()%>">
+					    		 -
+				    		</a>
+						  </div>
+						  <input type="text" class="form-control" placeholder="" value="<%= g.getQuantity() %>">
+						  <div class="input-group-append">
+				    		<a class="btn btn-outline-secondary" href="processCart.jsp?op=up1&bookId=<%= g.getBookId()%>">
+				    			+
+				    		</a>
+						  </div>
+						</div>
+					</div>
+					<a class="text-decoration-none pl-3" href="processCart.jsp?op=delete&bookId=<%= g.getBookId()%>">Xóa</a>
+				</div>
+			</div>
+			<% }%>
+			<div class="">
+				<a href="processCart.jsp?op=deleteall" class="text-primary">Xóa hết</a>
+			</div>
+			
+		
+    	</div>
+    	<div class="col-md-3 bg-white p-3">
+    		<div class="d-flex flex-row justify-content-between">
+    			<h4 class="font-weight-light">Thành tiền:</h4>
+    			<h4 class="font-weight-light"><%= String.format("%,d", cart.sum()).replace(',', '.') %>đ</h4>
+    		</div>
+    		<button style="width: 100%" class="d-block btn btn-danger mt-4">Đặt hàng</button>
+    	</div>
+    	<% }%>
+    </div>
+    
     </div>
 	
     <footer class="py-4 border-top">

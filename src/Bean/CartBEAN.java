@@ -7,15 +7,16 @@ public class CartBEAN {
 	private long price;
 	private int quantity;
 	private long totalPrice;
+	private String imageUrl;
 	
-	public CartBEAN(String bookId, String bookName, String author, long price, int quantity) {
+	public CartBEAN(String bookId, String bookName, String author, long price, int quantity, String imageUrl) {
 		super();
 		this.bookId = bookId;
 		this.bookName = bookName;
 		this.author = author;
 		this.price = price;
 		this.quantity = quantity;
-		this.totalPrice = quantity * price;
+		this.imageUrl = imageUrl;
 	}
 
 	public String getBookId() {
@@ -59,10 +60,18 @@ public class CartBEAN {
 	}
 
 	public long getTotalPrice() {
-		return totalPrice;
+		return this.quantity * this.price;
 	}
 
 	public void setTotalPrice(long totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }

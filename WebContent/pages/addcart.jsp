@@ -16,6 +16,7 @@ String bookId = request.getParameter("id");
 String bookName = request.getParameter("bookname");
 String author = request.getParameter("author");
 String priceStr = request.getParameter("price");
+String imageUrl = request.getParameter("imageUrl");
 
 if(priceStr != null) {
 	long price = Long.parseLong(priceStr);
@@ -40,7 +41,7 @@ if(priceStr != null) {
 	}
 	
 	if(!exist) {
-		cart.addCart(bookId, bookName, author, price, 1);
+		cart.addCart(bookId, bookName, author, price, 1, imageUrl);
 	}
 	
 	// b3: save cart var into session

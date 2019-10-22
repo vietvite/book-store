@@ -25,7 +25,9 @@
   </nav>
 
   <div class="ml-auto">
-    <button class="btn btn-sm btn-light btn-outline-danger"><i class="fas fa-cart-arrow-down"></i> Giỏ hàng <span class="text-dark" id="cartQuantity">12</span></button>
+  	<a href="http://localhost:8080/book_trading_servlet/pages/cart.jsp">
+    	<button class="btn btn-sm btn-light btn-outline-danger"><i class="fas fa-cart-arrow-down"></i> Giỏ hàng <span class="text-dark" id="cartQuantity"></span></button>
+    </a>
   </div>
 
 </nav>

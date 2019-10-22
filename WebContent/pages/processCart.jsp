@@ -20,10 +20,45 @@ if(operation.equals("down1")) {
 	cart = (CartBO) session.getAttribute("cart");
 	
 	// b2: change cart var when addCart called
-	boolean exist = false;
 	for(CartBEAN c: cart.cartList) {
 		if(c.getBookId().equals(bookId)) {
 			c.setQuantity(c.getQuantity() - 1);
+		}
+	}
+	
+	// b3: save cart var into session
+	session.setAttribute("cart", cart);
+	// Show cart
+	response.sendRedirect("cart.jsp");
+}
+
+if(operation.equals("up1")) {
+	CartBO cart = null;
+	
+	cart = (CartBO) session.getAttribute("cart");
+	
+	// b2: change cart var when addCart called
+	for(CartBEAN c: cart.cartList) {
+		if(c.getBookId().equals(bookId)) {
+			c.setQuantity(c.getQuantity() + 1);
+		}
+	}
+	
+	// b3: save cart var into session
+	session.setAttribute("cart", cart);
+	// Show cart
+	response.sendRedirect("cart.jsp");
+}
+
+if(operation.equals("delete")) {
+	CartBO cart = null;
+	
+	cart = (CartBO) session.getAttribute("cart");
+	
+	// b2: change cart var when addCart called
+	for(CartBEAN c: cart.cartList) {
+		if(c.getBookId().equals(bookId)) {
+			cart.cartList.remove(c);
 		}
 	}
 	
