@@ -8,7 +8,7 @@ public class BookBEAN {
 	private String categoryId;
 	private Long coverPrice;
 	private Long price;
-	private Integer quantity;
+	private int quantity;
 	private String imageUrl;
 	
 	public BookBEAN() {

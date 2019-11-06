@@ -50,6 +50,25 @@ if(operation.equals("up1")) {
 	response.sendRedirect("cart.jsp");
 }
 
+if(operation.equals("update")) {
+	String quantity = request.getParameter("quantity");
+	CartBO cart = null;
+	
+	cart = (CartBO) session.getAttribute("cart");
+	
+	// b2: change cart var when addCart called
+	for(CartBEAN c: cart.cartList) {
+		if(c.getBookId().equals(bookId)) {
+			c.setQuantity(Integer.parseInt(quantity));
+		}
+	}
+	
+	// b3: save cart var into session
+	session.setAttribute("cart", cart);
+	// Show cart
+	response.sendRedirect("cart.jsp");
+}
+
 if(operation.equals("delete")) {
 	CartBO cart = null;
 	
@@ -59,6 +78,10 @@ if(operation.equals("delete")) {
 	for(CartBEAN c: cart.cartList) {
 		if(c.getBookId().equals(bookId)) {
 			cart.cartList.remove(c);
+			if(cart.cartList.isEmpty()) {
+				response.sendRedirect("home.jsp");
+				return;
+			}
 		}
 	}
 	
@@ -66,6 +89,33 @@ if(operation.equals("delete")) {
 	session.setAttribute("cart", cart);
 	// Show cart
 	response.sendRedirect("cart.jsp");
+}
+
+if(operation.equals("deletemany")) {
+	String[] t = request.getParameterValues("");
+	for(String a: t) {
+		out.print("GT: " + a);
+	}
+	
+	CartBO cart = null;
+	
+	cart = (CartBO) session.getAttribute("cart");
+	
+	// b2: change cart var when addCart called
+	for(CartBEAN c: cart.cartList) {
+		if(c.getBookId().equals(bookId)) {
+			cart.cartList.remove(c);
+			if(cart.cartList.isEmpty()) {
+				response.sendRedirect("home.jsp");
+				return;
+			}
+		}
+	}
+	
+	// b3: save cart var into session
+	session.setAttribute("cart", cart);
+	// Show cart
+	//response.sendRedirect("cart.jsp");
 }
 
 if(operation.equals("deleteall")) {

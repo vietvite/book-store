@@ -11,4 +11,8 @@ public class BookBO {
 	public ArrayList<BookBEAN> getBooks() {
 		return book.getBooks();
 	}
+	
+	public BookBEAN findById(String bookId) {
+		return book.findById(bookId); 
+	}
 }

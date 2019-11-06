@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-  <a class="navbar-brand" href="http://localhost:8080/book_trading_servlet/pages/home.jsp">Book Store</a>
+  <a class="navbar-brand" href="http://localhost:8080/book_trading_servlet/">Book Store</a>
 
   <!-- Account button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#account" aria-controls="account" aria-expanded="false" aria-label="Toggle navigation">

@@ -12,7 +12,7 @@
 <body>
 <%
 
-String bookId = request.getParameter("id");
+/* String bookId = request.getParameter("id");
 String bookName = request.getParameter("bookname");
 String author = request.getParameter("author");
 String priceStr = request.getParameter("price");
@@ -48,7 +48,7 @@ if(priceStr != null) {
 	session.setAttribute("cart", cart);
 	// Show cart
 	response.sendRedirect("cart.jsp");
-}
+} */
 
 %>
 </body>
