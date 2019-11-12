@@ -14,7 +14,7 @@ import Bo.BookBO;
 /**
  * Servlet implementation class home
  */
-@WebServlet("/")
+@WebServlet("")
 public class home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,14 +30,12 @@ public class home extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("HOME");
 		RequestDispatcher r;
 		
 		r = request.getRequestDispatcher("pages/home.jsp");
 		BookBO bookBo = new BookBO();
 		request.setAttribute("books", bookBo);
 		r.forward(request, response);
-		System.out.println("HOME end");
 	}
 
 	/**
@@ -45,7 +43,6 @@ public class home extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
+		doGet(request, response);
 	}
-
 }
