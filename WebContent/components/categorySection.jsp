@@ -3,12 +3,11 @@
     
 <%@page import="Bean.BookBEAN"%>
 <%@page import="Bo.BookBO"%>
-<div class="mt-5">
+<div class="mt-3">
 
 <!-- @foreach($booksGroupByCategory as $category) -->
 <%-- <% for() { %> --%>
-  <a href="#" class="text-decoration-none"><h2 class="h2 d-inline pr-1 pr-md-3 text-dark">Thể loại</h2></a>
-  <a href="#"><button class="btn btn-sm btn-light text-primary border-0 mt-n2">Xem thêm</button></a>
+  <a href="#" class="text-decoration-none"><h3 class="h3 d-inline text-dark">Thể loại</h3></a>
   <hr>
   <div class="row">
     <%
