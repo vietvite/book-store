@@ -39,7 +39,7 @@
 				
 				<div class="d-flex flex-row">
 					<h5 class="mr-4"><%= String.format("%,d", g.getTotalPrice()).replace(',', '.') %>đ</h5>
-					<div style="width: 78px;">
+					<div style="width: 79px;">
 						<div class="input-group input-group-sm">
 						  <div class="input-group-prepend">
 					    	<a class="btn btn-outline-secondary" href="cart?op=down1&id=<%= g.getBookId()%>">
@@ -55,7 +55,9 @@
 						</div>
 						<button class="btn btn-sm btn-light mt-2" onclick="update(event,'<%= g.getBookId()%>');">Cập nhật</button>
 					</div>
-					<a class="text-decoration-none pl-3" href="cart?op=delete&id=<%= g.getBookId()%>">Xóa</a>
+					<div>
+						<a class="text-decoration-none m-3 text-dark" href="cart?op=delete&id=<%= g.getBookId()%>"><i class="far fa-trash-alt"></i></a>
+					</div>
 				</div>
 			</div>
 			<% }%>

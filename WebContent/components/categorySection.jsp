@@ -28,7 +28,8 @@
 
             <p class="text-danger font-weight-bold mb-1"><%= book.getPrice() %> đ</p>
             <a href="cart?id=<%= book.getId() %>&bookname=<%= book.getBookName() %>&price=<%= book.getPrice() %>&imageUrl=<%= book.getImageUrl() %>" class="btn btn-danger btn-sm"><i class="px-2 fas fa-shopping-cart"></i></a>
-            <a href="cart?op=justadd&id=<%= book.getId() %>&bookname=<%= book.getBookName() %>&price=<%= book.getPrice() %>&imageUrl=<%= book.getImageUrl() %>" class="btn btn-danger btn-sm"><i class="px-2 fas fa-plus"></i></a>
+            <a href="#" class="btn btn-danger btn-sm"><i class="px-2 fas fa-plus"></i></a>
+            <%-- <a href="cart?op=justadd&id=<%= book.getId() %>&bookname=<%= book.getBookName() %>&price=<%= book.getPrice() %>&imageUrl=<%= book.getImageUrl() %>" class="btn btn-danger btn-sm"><i class="px-2 fas fa-plus"></i></a> --%>
           </div>
           </a>
        </div>
