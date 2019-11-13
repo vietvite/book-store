@@ -103,19 +103,14 @@ public class cart extends HttpServlet {
 				cart = (CartBO) session.getAttribute("cart");
 				
 				// b2: change cart var when addCart called
-//				for(CartBEAN c: cart.cartList) {
-//					if(c.getBookId().equals(bookId)) {
-//						System.out.println(c);
-//						cart.cartList.remove(c); // BUG: maybe current properties (quantity) of c (CartBEAN) different from properties existed in cart.cartList  
-//					}
-//				}
-				
-				for (Iterator<CartBEAN> iterator = cart.cartList.iterator(); iterator.hasNext(); ) {
-				    CartBEAN value = iterator.next();
-				    if (value.getBookId().equals(bookId)) {
-				        iterator.remove();
-				    }
+				for(CartBEAN c: cart.cartList) {
+					if(c.getBookId().equals(bookId)) {
+						System.out.println(c);
+						cart.cartList.remove(c);  
+						break;
+					}
 				}
+				
 				// Show cart
 				if(cart.cartList.isEmpty()) {
 					// b3: save cart var into session
