@@ -1,3 +1,4 @@
+<%@page import="Bean.UserBEAN"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -25,13 +26,7 @@
 
   <div class="collapse navbar-collapse flex-grow-0" id="account">
     <div class="pl-md-3 my-3 my-md-0 text-center">
-      <%
-      	boolean isLogin = (boolean) request.getAttribute("isLogin");
-      %>
-      <% if(!isLogin) { %>
-    	  <a href="/book-store/user?op=login"><button class="btn btn-sm btn-light font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng nhập</button></a>
-    	  <button class="btn btn-sm btn-primary font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng ký</button>
-      <% } else { %>
+      <% if(request.getAttribute("email") != null && !request.getAttribute("email").equals("")) { %>
 		<div class="dropdown">
 		  <button class="btn btn-sm btn-light font-weight-bold border-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <i class="fas fa-user-circle"></i> Tài khoản
@@ -41,6 +36,9 @@
 		    <a class="dropdown-item" href="/book-store/user?op=logout">Đăng xuất</a>
 		  </div>
 		</div>
+      <% } else { %>
+    	  <a href="/book-store/user?op=login"><button class="btn btn-sm btn-light font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng nhập</button></a>
+    	  <button class="btn btn-sm btn-primary font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng ký</button>
       <% } %>
     </div>
   </div>

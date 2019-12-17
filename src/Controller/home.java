@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Bean.UserBEAN;
 import Bo.BookBO;
 import Bo.singletonTest;
 
@@ -35,14 +36,13 @@ public class home extends HttpServlet {
 		RequestDispatcher r;
 		HttpSession session = request.getSession();
 		
-		boolean isLogin = session.getAttribute("isLogin") != null
-				? (boolean) session.getAttribute("isLogin")
-				: false;
+		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
+		request.setAttribute("email", user != null ? user.getEmail() : null);
+
 		
 		r = request.getRequestDispatcher("pages/home.jsp");
 		BookBO bookBo = new BookBO();
 		request.setAttribute("books", bookBo);
-		request.setAttribute("isLogin", isLogin);
 		
 		r.forward(request, response);
 	}

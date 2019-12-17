@@ -13,7 +13,6 @@
 </head>
 
 <body>
-	
 	<div class="container">
 	
 		<div class="sticky-top">
@@ -25,7 +24,7 @@
 			<div class="col-4 offset-4">
 				<h1 class="text-center">Đăng nhập</h1>
 				<p class="text-danger text-sm text-center"><%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %></p>
-				<form action="user?op=login" method="post" onsubmit="return checkLogin()">
+				<form action="user?op=login" method="POST" onsubmit="return checkLogin()">
 				  <div class="form-group">
 				    <label for="email">Email</label>
 				    <input type="text" name="email" value="" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">

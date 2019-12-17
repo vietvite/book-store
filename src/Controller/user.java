@@ -31,7 +31,7 @@ public class user extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter("op");
-		System.out.println(op);
+
 		switch (op) {
 		case "login":
 			login(request, response);
@@ -43,10 +43,10 @@ public class user extends HttpServlet {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + op);
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	
@@ -54,15 +54,19 @@ public class user extends HttpServlet {
 		RequestDispatcher r;
 		HttpSession session = request.getSession();
 //		check login session
-		boolean isLogin = session.getAttribute("isLogin") != null
-				? true
-				: false;
-		request.setAttribute("isLogin", isLogin);
-		if(isLogin) {
+		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
+
+		if(user != null) {
+			request.setAttribute("email", user.getEmail());
+			
+			System.out.println("isLogin: " + user.getEmail());
 			response.sendRedirect("/book-store/");
 			return;
+		} else {
+			request.setAttribute("email", null);
+			
+			System.out.println("isLogin: " + null);
 		}
-		UserDAO userdao = new UserDAO();
 
 //		validate input params
 		String email = request.getParameter("email");
@@ -83,21 +87,22 @@ public class user extends HttpServlet {
 		}
 
 //		login
-		UserBEAN user = userdao.login(email, password);
-		if(user != null) {
-			session.setAttribute("isLogin", true);
-			session.setAttribute("user", user);
+		UserDAO userdao = new UserDAO();
+		UserBEAN userLogin = userdao.login(email, password);
+		if(userLogin != null) {
+			session.setAttribute("user", userLogin);
 			response.sendRedirect("/book-store/");
+			return;
 		} else {
 			r = request.getRequestDispatcher("pages/login.jsp");
 			request.setAttribute("error", "Email hoặc mật khẩu không đúng");
 			r.forward(request, response);
+			return;
 		}
 	}
 	
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		session.setAttribute("isLogin", null);
 		session.setAttribute("user", null);
 		response.sendRedirect("/book-store/");
 	}

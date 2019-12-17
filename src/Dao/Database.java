@@ -20,7 +20,7 @@ public class Database {
     private void connect() throws SQLException, ClassNotFoundException {
         Class.forName(DB_DRV);
         conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-        System.out.println("Database connnected!");
+//        System.out.println("Database connnected!");
     }
     
     public Connection getConnection() {
@@ -41,7 +41,7 @@ public class Database {
     
     public void close() throws SQLException {
         conn.close();
-        System.out.println("Database connection closed!");
+//        System.out.println("Database connection closed!");
     }
     
     public ResultSet getAll(String dbName) throws SQLException {

@@ -30,20 +30,15 @@ public class cart extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		boolean isLogin = session.getAttribute("isLogin") != null
-				? (boolean) session.getAttribute("isLogin")
-				: false;
-		request.setAttribute("isLogin", isLogin);
-		
-		UserBEAN u = (UserBEAN)session.getAttribute("user");
-		System.out.println("isLogin: " + isLogin);
-		System.out.println("u: " + u);
-		
+
+		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
+		request.setAttribute("email", user != null ? user.getEmail() : null);
+
 		String bookId = request.getParameter("id");
 		String operation = request.getParameter("op");
-		
+
 		System.out.println("bookId: " + bookId + " - operation: " + operation);
-		
+
 //		handle process in cart page
 		if(bookId != null && operation != null) {
 			System.out.println("Vo process");
@@ -166,9 +161,9 @@ public class cart extends HttpServlet {
 			System.out.println("Voo checkout");
 			CartBO cart = (CartBO) session.getAttribute("cart");
 			OrderHistoryBO bo = new OrderHistoryBO();
-			UserBEAN user = (UserBEAN) session.getAttribute("user");
 			if(user == null) {
-				
+				response.sendRedirect("/book-store/user?op=login");
+				return;
 			}
 			
 			System.out.println(cart.cartList.get(0).getBookName());
@@ -176,9 +171,9 @@ public class cart extends HttpServlet {
 			
 			bo.setOrderHistory(user, cart.cartList);
 			session.setAttribute("cart", null);
+			response.sendRedirect("/book-store/");
 			return;
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
