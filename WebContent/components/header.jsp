@@ -33,17 +33,17 @@
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    <% if(request.getAttribute("role") != null && request.getAttribute("role").equals("admin")) { %>
-		    	<a class="dropdown-item" href="/book-store/manager">Quản lý sách</a>
-		    	<a class="dropdown-item" href="/book-store/manager?op=addbook">Thêm sách</a>
+		    	<a class="dropdown-item" href="/book-store/manager"><i class="fas fa-tasks"></i> Quản lý sách</a>
+		    	<a class="dropdown-item" href="/book-store/manager?op=addbook"><i class="fas fa-plus"></i> Thêm sách</a>
 		    <% } else { %>
-			    <a class="dropdown-item" href="/book-store/user?op=orderhistory">Lịch sử đặt hàng</a>
+			    <a class="dropdown-item" href="/book-store/user?op=orderhistory"><i class="fas fa-history"></i> Lịch sử đặt hàng</a>
 		    <% } %>
-		    <a class="dropdown-item" href="/book-store/user?op=logout">Đăng xuất</a>
+		    <a class="dropdown-item" href="/book-store/user?op=logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
 		  </div>
 		</div>
       <% } else { %>
-    	  <a href="/book-store/user?op=login"><button class="btn btn-sm btn-light font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng nhập</button></a>
-    	  <button class="btn btn-sm btn-primary font-weight-bold border-0"><i class="fas fa-user-circle"></i> Đăng ký</button>
+    	  <a href="/book-store/user?op=login"><button class="btn btn-sm btn-light border-0"><i class="fas fa-sign-in-alt"></i> ĐĂNG NHẬP</button></a>
+    	  <button class="btn btn-sm btn-primary border-0">ĐĂNG KÝ</button>
       <% } %>
     </div>
   </div>

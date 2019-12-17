@@ -30,4 +30,8 @@ public class BookBO {
 	public void editBook(BookBEAN book) {
 		dao.editBook(book);
 	}
+	
+	public void addBook(BookBEAN book) {
+		dao.addBook(book);
+	}
 }

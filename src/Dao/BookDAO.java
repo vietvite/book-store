@@ -123,6 +123,28 @@ public class BookDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void addBook(BookBEAN book) {
+		try {
+			db = new Database();
+			String query = "INSERT INTO `books`(`id`, `bookname`, `author`, `categoryId`, `description`, `price`, `coverPrice`, `quantity`, `imageUrl`) VALUES (?,?,?,?,?,?,?,?,?)";
+			PreparedStatement cmd = db.getConnection().prepareStatement(query);
+			cmd.setString(1, book.getId());
+			cmd.setString(2, book.getBookName());
+			cmd.setString(3, book.getAuthor());
+			cmd.setString(4, book.getCategoryId());
+			cmd.setString(5, book.getDescription());
+			cmd.setLong(6, book.getPrice());
+			cmd.setLong(7, book.getCoverPrice());
+			cmd.setInt(8, book.getQuantity());
+			cmd.setString(9, book.getImageUrl());
+			
+			cmd.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
 

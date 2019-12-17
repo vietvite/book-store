@@ -1,14 +1,18 @@
 package Controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import Bean.BookBEAN;
 import Bean.UserBEAN;
@@ -38,6 +42,10 @@ public class Manager extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
+		if(user == null || user != null && !user.getRole().equals("admin")) {
+			response.sendRedirect("/book-store/user?op=login");
+			return;
+		}
 		request.setAttribute("email", user != null ? user.getEmail() : null);
 		request.setAttribute("role", user != null ? user.getRole() : null);
 
@@ -49,10 +57,16 @@ public class Manager extends HttpServlet {
 			deleteBook(request, response);
 			break;
 		case "editpage":
-			directEditPage(request, response);
+			directToEditPage(request, response);
+			break;
+		case "addbook":
+			directToAddPage(request, response);
 			break;
 		case "submitedit":
 			editBook(request, response);
+			break;
+		case "submitaddbook":
+			addBook(request, response);
 			break;
 		
 		default:
@@ -61,7 +75,7 @@ public class Manager extends HttpServlet {
 		}
 	}
 
-	private void directEditPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void directToEditPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher r;
 		r = request.getRequestDispatcher("pages/editBook.jsp");
 		BookBO bookBo = new BookBO();
@@ -72,6 +86,16 @@ public class Manager extends HttpServlet {
 		request.setAttribute("categories", bo.getAllCategories());
 		
 		request.setAttribute("book", book);
+		r.forward(request, response);
+	}
+	
+	private void directToAddPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher r;
+		r = request.getRequestDispatcher("pages/addBook.jsp");
+
+		CategoryBO bo = new CategoryBO();
+		request.setAttribute("categories", bo.getAllCategories());
+		
 		r.forward(request, response);
 	}
 
@@ -94,6 +118,34 @@ public class Manager extends HttpServlet {
 		BookBEAN book = new BookBEAN(bookId, bookName, author, description, categoryId, coverPrice, price, quantity, imageUrl);
 		System.out.println("Book: " + book.getBookName());
 		bo.editBook(book);
+		RequestDispatcher r;
+		r = request.getRequestDispatcher("pages/bookManager.jsp");
+		BookBO bookBo = new BookBO();
+		request.setAttribute("books", bookBo.getBooks());
+		r.forward(request, response);
+	}
+	
+	private void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BookBO bo = new BookBO();
+		String bookId = request.getParameter("bookId");
+		String bookName = request.getParameter("bookName");
+		String author = request.getParameter("author");
+		String description = request.getParameter("description");
+		String categoryId = request.getParameter("categoryId");
+		long coverPrice = Long.parseLong(request.getParameter("coverPrice"));
+		long price = Long.parseLong(request.getParameter("price"));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String imageUrl = request.getParameter("imageUrl");
+		
+//		Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+//	    String imageUrl = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+//	    InputStream fileContent = filePart.getInputStream();
+		
+		if(bookId == null) {
+			return;
+		}
+		BookBEAN book = new BookBEAN(bookId, bookName, author, description, categoryId, coverPrice, price, quantity, imageUrl);
+		bo.addBook(book);
 		RequestDispatcher r;
 		r = request.getRequestDispatcher("pages/bookManager.jsp");
 		BookBO bookBo = new BookBO();

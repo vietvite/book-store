@@ -52,8 +52,8 @@
 		      <td><%= item.getCategoryId() %></td>
 		      <td><%= item.getCoverPrice() %></td>
 		      <td class="d-flex flex-col">
-		      	<a href="/book-store/manager?op=editpage&bookId=<%= item.getId() %>"><button class="mx-1 btn btn-sm btn-info">Sửa</button></a>
-		      	<button class="mx-1 btn btn-sm btn-danger" onclick="deleteBook(event,'<%= item.getId() %>')">Xóa</button>
+		      	<a href="/book-store/manager?op=editpage&bookId=<%= item.getId() %>"><button class="mx-1 btn btn-sm btn-info"><i class="far fa-edit"></i></button></a>
+		      	<button class="mx-1 btn btn-sm btn-danger" onclick="deleteBook(event,'<%= item.getId() %>')"><i class="far fa-trash-alt"></i></button>
 		      </td>
 		    </tr>
 		    <% } %>

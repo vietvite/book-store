@@ -26,58 +26,58 @@
     
 	<div class="px-3">
 	  	<%
-	  	BookBEAN item = (BookBEAN) request.getAttribute("book");
-	  	ArrayList<CategoryBEAN> categories = (ArrayList<CategoryBEAN>) request.getAttribute("categories");
+	  	ArrayList<CategoryBEAN> lstCates = (ArrayList<CategoryBEAN>) request.getAttribute("categories");
 		%>
-		<form action="/book-store/manager?op=submitedit" method="POST">
-		  <input type="hidden" name="bookId" value="<%= item.getId() %>" class="form-control" id="bookId">
+		<form action="/book-store/manager?op=submitaddbook" method="POST">
+		  <div class="form-group">
+		    <label for="bookId">Mã sách</label>
+		    <input type="text" name="bookId" class="form-control" id="bookId">
+		  </div>
 		  <div class="form-group">
 		    <label for="bookName">Tên sách</label>
-		    <input type="text" name="bookName" value="<%= item.getBookName() %>" class="form-control" id="bookName">
+		    <input type="text" name="bookName" class="form-control" id="bookName">
 		  </div>
 		  <div class="form-group">
 		    <label for="author">Tác giả</label>
-		    <input type="text" name="author" value="<%= item.getAuthor() %>" class="form-control" id="author">
+		    <input type="text" name="author" class="form-control" id="author">
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="desc">Mô tả</label>
-		    <textarea class="form-control" name="description" id="desc" rows="3"><%= item.getDescription() %></textarea>
+		    <input type="text" name="description" class="form-control" id="desc">
 		  </div>
-  
 		  <div class="form-group">
 		    <label for="cateId">Thể loại</label>
 		    <select class="custom-select" name="categoryId">
-		      <% for(CategoryBEAN c: categories) { 
-		    	  String isSelected = item.getCategoryId().equals(c.getId()) ? "selected" : "";
-		      %>
-			  <option value="<%= c.getId() %>" <%=isSelected %>><%= c.getCategoryName() %></option>
+		      <% for(CategoryBEAN c: lstCates) { %>
+			  <option value="<%= c.getId() %>"><%= c.getCategoryName() %></option>
 			  <% } %>
 			</select>
 		  </div>
 		  <div class="form-group">
 		    <label for="coverPrice">Giá bìa</label>
-		    <input type="text" name="coverPrice" value="<%= item.getCoverPrice() %>" class="form-control" id="coverPrice">
+		    <input type="number" name="coverPrice" class="form-control" id="coverPrice">
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="price">Giá</label>
-		    <input type="text" name="price" value="<%= item.getPrice() %>" class="form-control" id="price">
+		    <input type="number" name="price" class="form-control" id="price">
 		  </div>
 		  <div class="form-group">
 		    <label for="quantity">Số lượng kho</label>
-		    <input type="text" name="quantity" value="<%= item.getQuantity() %>" class="form-control" id="quantity">
+		    <input type="number" name="quantity" class="form-control" id="quantity">
 		  </div>
 		  <div class="form-group">
 		    <label for="imageurl">URL ảnh</label>
-		    <input type="text" name="imageUrl" value="<%= item.getImageUrl() %>" class="form-control" id="imageurl">
+		    <input type="text" name="imageUrl" class="form-control" id="imageurl">
 		  </div>
-		  <%-- <div class="custom-file">
-			  <input type="file" class="custom-file-input" id="customFile">
-			  <label class="custom-file-label" for="customFile"><%= item.getImageUrl() %></label>
-			</div> --%>
+		  <!-- <div class="custom-file">
+			  <input type="file" class="custom-file-input" name="imageUrl" id="imageUrl">
+			  <label class="custom-file-label" for="imageUrl">Chọn ảnh</label>
+			</div> -->
 		  
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  
+		  <button type="submit" class="btn btn-primary mt-3">Submit</button>
 		</form>
 	
 	</div>
