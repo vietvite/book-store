@@ -32,7 +32,12 @@
 		    <i class="fas fa-user-circle"></i> Tài khoản
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="/book-store/user?op=orderhistory">Lịch sử đặt hàng</a>
+		    <% if(request.getAttribute("role") != null && request.getAttribute("role").equals("admin")) { %>
+		    	<a class="dropdown-item" href="/book-store/manager">Quản lý sách</a>
+		    	<a class="dropdown-item" href="/book-store/manager?op=addbook">Thêm sách</a>
+		    <% } else { %>
+			    <a class="dropdown-item" href="/book-store/user?op=orderhistory">Lịch sử đặt hàng</a>
+		    <% } %>
 		    <a class="dropdown-item" href="/book-store/user?op=logout">Đăng xuất</a>
 		  </div>
 		</div>

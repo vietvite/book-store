@@ -38,7 +38,7 @@ public class home extends HttpServlet {
 		
 		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
 		request.setAttribute("email", user != null ? user.getEmail() : null);
-
+		request.setAttribute("role", user != null ? user.getRole() : null);
 		
 		r = request.getRequestDispatcher("pages/home.jsp");
 		BookBO bookBo = new BookBO();

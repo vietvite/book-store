@@ -6,20 +6,28 @@ import Bean.BookBEAN;
 import Dao.BookDAO;
 
 public class BookBO {
-	BookDAO book = new BookDAO();
+	BookDAO dao = new BookDAO();
 	ArrayList<BookBEAN> lst;
 	
 	public ArrayList<BookBEAN> getBooks() {
-		lst = book.getBooks();
+		lst = dao.getBooks();
 		return lst;
 	}
 	
 	public ArrayList<BookBEAN> findBookOrAuthor(String keyword) {
-		ArrayList<BookBEAN> returnLst = book.findBookOrAuthor(keyword);
+		ArrayList<BookBEAN> returnLst = dao.findBookOrAuthor(keyword);
 		return returnLst;
 	}
 	
 	public BookBEAN findById(String bookId) {
-		return book.findById(bookId); 
+		return dao.findById(bookId); 
+	}
+	
+	public void deleteBook(String bookId) {
+		dao.deleteBook(bookId);
+	}
+
+	public void editBook(BookBEAN book) {
+		dao.editBook(book);
 	}
 }

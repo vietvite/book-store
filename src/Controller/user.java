@@ -57,6 +57,7 @@ public class user extends HttpServlet {
 		
 		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
 		request.setAttribute("email", user != null ? user.getEmail() : null);
+		request.setAttribute("role", user != null ? user.getRole() : null);
 
 		r = request.getRequestDispatcher("pages/orderHistory.jsp");
 		OrderHistoryBO bo = new OrderHistoryBO();
@@ -77,6 +78,7 @@ public class user extends HttpServlet {
 //		check login session
 		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
 		request.setAttribute("email", user != null ? user.getEmail() : null);
+		request.setAttribute("role", user != null ? user.getRole() : null);
 
 //		validate input params
 		String email = request.getParameter("email");

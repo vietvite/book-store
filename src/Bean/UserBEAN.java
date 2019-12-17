@@ -5,15 +5,25 @@ public class UserBEAN {
 	private String username;
 	private String email;
 	private String password;
+	private String role;
 	
-	public UserBEAN(String id, String username, String email, String password) {
+	public UserBEAN(String id, String username, String email, String password, String role) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.role = role;
 	}
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public String getId() {
 		return id;
 	}

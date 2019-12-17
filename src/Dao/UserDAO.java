@@ -19,7 +19,7 @@ public class UserDAO {
 
 			ResultSet rs = cmd.executeQuery();
 			if(rs.next()) {
-				user = new UserBEAN(rs.getString("id"), rs.getString("username"), rs.getString("email"), rs.getString("password"));
+				user = new UserBEAN(rs.getString("id"), rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
 			}
 //			Database.close();
 		} catch (SQLException e) {

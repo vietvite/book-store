@@ -88,6 +88,41 @@ public class BookDAO {
 	public ArrayList<BookBEAN> findBookOrAuthor(String keyword) {
 		return null;
 	}
+	
+	public void deleteBook(String bookId) {
+		try {
+			db = new Database();
+			String query = "DELETE FROM `books` WHERE id=?";
+			PreparedStatement cmd = db.getConnection().prepareStatement(query);
+			cmd.setString(1, bookId);
+			cmd.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void editBook(BookBEAN book) {
+		try {
+			db = new Database();
+			String query = "UPDATE `books` SET `bookname`=?,`author`=?,`categoryId`=?,`description`=?,`price`=?,`coverPrice`=?,`quantity`=?,`imageUrl`=? WHERE id=?";
+			PreparedStatement cmd = db.getConnection().prepareStatement(query);
+			cmd.setString(1, book.getBookName());
+			cmd.setString(2, book.getAuthor());
+			cmd.setString(3, book.getCategoryId());
+			cmd.setString(4, book.getDescription());
+			cmd.setLong(5, book.getPrice());
+			cmd.setLong(6, book.getCoverPrice());
+			cmd.setInt(7, book.getQuantity());
+			cmd.setString(8, book.getImageUrl());
+			cmd.setString(9, book.getId());
+			
+			cmd.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
 

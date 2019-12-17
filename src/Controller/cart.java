@@ -33,6 +33,7 @@ public class cart extends HttpServlet {
 
 		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
 		request.setAttribute("email", user != null ? user.getEmail() : null);
+		request.setAttribute("role", user != null ? user.getRole() : null);
 
 		String bookId = request.getParameter("id");
 		String operation = request.getParameter("op");
