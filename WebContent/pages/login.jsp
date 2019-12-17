@@ -25,18 +25,14 @@
 			<div class="col-4 offset-4">
 				<h1 class="text-center">Đăng nhập</h1>
 				<p class="text-danger text-sm text-center"><%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %></p>
-				<form action="login" method="post" onsubmit="return checkLogin()">
+				<form action="user?op=login" method="post" onsubmit="return checkLogin()">
 				  <div class="form-group">
-				    <label for="username">Email</label>
-				    <input type="text" name="username" value="" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username">
+				    <label for="email">Email</label>
+				    <input type="text" name="email" value="" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
 				  </div>
 				  <div class="form-group">
 				    <label for="password">Mật khẩu</label>
 				    <input type="password" name="password" value="" class="form-control" id="password" placeholder="Password">
-				  </div>
-				  <div class="form-group form-check">
-				    <input type="checkbox" class="form-check-input" id="saveLogin">
-				    <label class="form-check-label" for="saveLogin">Lưu đăng nhập</label>
 				  </div>
 				  <button type="submit" class="btn btn-primary">Submit</button>
 				</form>

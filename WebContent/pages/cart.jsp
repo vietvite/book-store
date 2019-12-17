@@ -20,7 +20,7 @@
 
     <div class="px-3">
     <h2 class="mb-3">Giỏ hàng</h2>
-    
+
     <% if(session.getAttribute("cart") != null) {
 		CartBO cart = (CartBO) session.getAttribute("cart");
 	%>
@@ -68,7 +68,7 @@
     			<h4 class="font-weight-light">Thành tiền:</h4>
     			<h4 class="font-weight-light"><%= String.format("%,d", cart.sum()).replace(',', '.') %>đ</h4>
     		</div>
-    		<button style="width: 100%" class="d-block btn btn-danger mt-4">Đặt hàng</button>
+    		<a href="/book-store/cart?op=checkout"><button style="width: 100%" class="d-block btn btn-danger mt-4">Đặt hàng</button></a>
     	</div>
     </div>
     <% } else { %>
@@ -82,7 +82,6 @@
     <footer class="py-4 border-top">
 	  <p class="text-center">Footer</p>
 	</footer>
-	
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import Bean.BookBEAN;
 import Bo.BookBO;
-import Bo.singletonTest;
 
 /**
- * Servlet implementation class home
+ * Servlet implementation class search
  */
-@WebServlet("")
-public class home extends HttpServlet {
+@WebServlet("/search")
+public class search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public home() {
+	BookBO bookbo = new BookBO();
+    public search() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +29,13 @@ public class home extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher r;
-		HttpSession session = request.getSession();
+		System.out.println("ZOOOO");
+		String key = request.getParameter("keyword");
 		
-		boolean isLogin = session.getAttribute("isLogin") != null
-				? (boolean) session.getAttribute("isLogin")
-				: false;
+		ArrayList<BookBEAN> lst = bookbo.findBookOrAuthor(key);
 		
-		r = request.getRequestDispatcher("pages/home.jsp");
-		BookBO bookBo = new BookBO();
-		request.setAttribute("books", bookBo);
-		request.setAttribute("isLogin", isLogin);
-		
+		RequestDispatcher r = request.getRequestDispatcher("pages/search.jsp");
+		request.setAttribute("books", lst);
 		r.forward(request, response);
 	}
 
@@ -54,4 +46,5 @@ public class home extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

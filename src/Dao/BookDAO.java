@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import Bean.BookBEAN;
 
 public class BookDAO {
-	Database db;
 	Connection conn;
 	BookBEAN book;
+	Database db;
 	
 	ArrayList<BookBEAN> books = null;
 	
@@ -35,9 +35,8 @@ public class BookDAO {
 		books = new ArrayList<BookBEAN>();
 		try {
 			db = new Database();
-			conn = db.getConnection();
 			String query = "SELECT * FROM `books`";
-			Statement cmd = conn.createStatement();
+			Statement cmd = db.getConnection().createStatement();
 			
 			ResultSet rs = cmd.executeQuery(query);
 			
@@ -61,10 +60,10 @@ public class BookDAO {
 		BookBEAN book = null;
 		try {
 			db = new Database();
-			conn = db.getConnection();
 			String query = "SELECT * FROM `books` WHERE id=?";
-			PreparedStatement cmd = conn.prepareStatement(query);
+			PreparedStatement cmd = db.getConnection().prepareStatement(query);
 			cmd.setString(1, bookId);
+//			tach ra lam tham so de truyen vao
 			
 			ResultSet rs = cmd.executeQuery();
 			if(rs.next()) {
@@ -84,6 +83,10 @@ public class BookDAO {
 			e.printStackTrace();
 		}
 		return book;
+	}
+
+	public ArrayList<BookBEAN> findBookOrAuthor(String keyword) {
+		return null;
 	}
 }
 

@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Bean.CartBEAN;
+import Bean.UserBEAN;
 import Bo.CartBO;
+import Bo.OrderHistoryBO;
 
 /**
  * Servlet implementation class cart
@@ -27,9 +29,18 @@ public class cart extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		boolean isLogin = session.getAttribute("isLogin") != null
+				? (boolean) session.getAttribute("isLogin")
+				: false;
+		request.setAttribute("isLogin", isLogin);
+		
+		UserBEAN u = (UserBEAN)session.getAttribute("user");
+		System.out.println("isLogin: " + isLogin);
+		System.out.println("u: " + u);
+		
 		String bookId = request.getParameter("id");
 		String operation = request.getParameter("op");
-		HttpSession session = request.getSession();
 		
 		System.out.println("bookId: " + bookId + " - operation: " + operation);
 		
@@ -51,7 +62,7 @@ public class cart extends HttpServlet {
 				// b3: save cart var into session
 				session.setAttribute("cart", cart);
 				// Show cart
-				response.sendRedirect("/book_trading_servlet/cart");
+				response.sendRedirect("/book-store/cart");
 //				return;
 			}
 			
@@ -70,7 +81,7 @@ public class cart extends HttpServlet {
 				// b3: save cart var into session
 				session.setAttribute("cart", cart);
 				// Show cart
-				response.sendRedirect("/book_trading_servlet/cart");
+				response.sendRedirect("/book-store/cart");
 //				return;
 			}
 			
@@ -93,7 +104,7 @@ public class cart extends HttpServlet {
 				// b3: save cart var into session
 				session.setAttribute("cart", cart);
 				// Show cart
-				response.sendRedirect("/book_trading_servlet/cart");
+				response.sendRedirect("/book-store/cart");
 				return;
 			}
 			
@@ -115,11 +126,11 @@ public class cart extends HttpServlet {
 				if(cart.cartList.isEmpty()) {
 					// b3: save cart var into session
 					session.setAttribute("cart", null);
-					response.sendRedirect("/book_trading_servlet/");
+					response.sendRedirect("/book-store/");
 				} else {
 					// b3: save cart var into session
 					session.setAttribute("cart", cart);
-					response.sendRedirect("/book_trading_servlet/cart");
+					response.sendRedirect("/book-store/cart");
 				}
 				
 				return;
@@ -132,29 +143,40 @@ public class cart extends HttpServlet {
 			
 			if(operation.equals("deleteall")) {
 				session.setAttribute("cart", null);
-				response.sendRedirect("/book_trading_servlet/");
+				response.sendRedirect("/book-store/");
 				return;
 			}
-			System.out.println("END: Vo process");
 		}
 		
 //		init cart session
 		if(bookId != null && operation == null) {
-			System.out.println("Vo init");
-			
-			
 			addCart(request);
 			// Show cart
-			response.sendRedirect("/book_trading_servlet/cart");
+			response.sendRedirect("/book-store/cart");
 			System.out.println("END: Vo init");
 			return;
 		}
 		
 		if(bookId == null && operation == null){
-			System.out.println("Vo cart page");
 			RequestDispatcher r = request.getRequestDispatcher("pages/cart.jsp");
 			r.forward(request, response);
-			System.out.println("END: Vo cart page");
+		}
+		
+		if(operation != null && operation.equals("checkout")) {
+			System.out.println("Voo checkout");
+			CartBO cart = (CartBO) session.getAttribute("cart");
+			OrderHistoryBO bo = new OrderHistoryBO();
+			UserBEAN user = (UserBEAN) session.getAttribute("user");
+			if(user == null) {
+				
+			}
+			
+			System.out.println(cart.cartList.get(0).getBookName());
+			System.out.println(user.getEmail());
+			
+			bo.setOrderHistory(user, cart.cartList);
+			session.setAttribute("cart", null);
+			return;
 		}
 		
 	}

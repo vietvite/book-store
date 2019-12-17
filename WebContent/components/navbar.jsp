@@ -18,11 +18,8 @@
     </div>
   </div>
 
-  <%-- <%@include file="./breadcrumb.jsp" %> --%>
-  
-
   <div class="ml-auto">
-  	<a href="http://localhost:8080/book_trading_servlet/cart">
+  	<a href="http://localhost:8080/book-store/cart">
     	<button class="btn btn-sm btn-light btn-outline-danger"><i class="fas fa-cart-arrow-down"></i> Giỏ hàng <span class="text-dark" id="cartQuantity"></span></button>
     </a>
   </div>
