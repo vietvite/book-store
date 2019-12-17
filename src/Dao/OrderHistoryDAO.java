@@ -1,6 +1,7 @@
 package Dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,6 +24,27 @@ public class OrderHistoryDAO {
 			if(count % 100 == 0 || count == lst.size()) {
 				cmd.executeBatch(); // execute every 100 query or equal list size
 			}
+		}
+	}
+	
+	public ArrayList<OrderHistoryBEAN> getOrderHistory(String userId) {
+		db = new Database();
+		String query = "SELECT orderHistoryId, bookId, bookName, order_history.quantity, date FROM `order_history` JOIN books ON order_history.bookId=books.id WHERE userId=?";
+		PreparedStatement cmd;
+		try {
+			cmd = db.getConnection().prepareStatement(query);
+			cmd.setString(1, userId);
+			ResultSet rs = cmd.executeQuery();
+			ArrayList<OrderHistoryBEAN> lstHistory = new ArrayList<OrderHistoryBEAN>();
+			while(rs.next()) {
+				lstHistory.add(new OrderHistoryBEAN(rs.getLong("orderHistoryId"), rs.getString("bookId"), rs.getInt("quantity"), rs.getString("bookName"), rs.getDate("date")));
+			}
+			
+			return lstHistory;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

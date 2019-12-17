@@ -32,7 +32,7 @@
 		    <i class="fas fa-user-circle"></i> Tài khoản
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#">Lịch sử đặt hàng</a>
+		    <a class="dropdown-item" href="/book-store/user?op=orderhistory">Lịch sử đặt hàng</a>
 		    <a class="dropdown-item" href="/book-store/user?op=logout">Đăng xuất</a>
 		  </div>
 		</div>

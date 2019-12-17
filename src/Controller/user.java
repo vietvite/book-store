@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Bean.OrderHistoryBEAN;
 import Bean.UserBEAN;
 import Bo.BookBO;
+import Bo.OrderHistoryBO;
 import Dao.UserDAO;
 
 /**
@@ -39,10 +42,28 @@ public class user extends HttpServlet {
 		case "logout":
 			logout(request, response);
 			break;
+		case "orderhistory":
+			directOrderHistory(request, response);
+			break;
 		
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + op);
 		}
+	}
+
+	private void directOrderHistory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher r;
+		HttpSession session = request.getSession();
+		
+		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
+		request.setAttribute("email", user != null ? user.getEmail() : null);
+
+		r = request.getRequestDispatcher("pages/orderHistory.jsp");
+		OrderHistoryBO bo = new OrderHistoryBO();
+		ArrayList<OrderHistoryBEAN> lst = bo.getOrderHistory(user.getId());
+		request.setAttribute("lstOrderHistory", lst);
+
+		r.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,18 +76,7 @@ public class user extends HttpServlet {
 		HttpSession session = request.getSession();
 //		check login session
 		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
-
-		if(user != null) {
-			request.setAttribute("email", user.getEmail());
-			
-			System.out.println("isLogin: " + user.getEmail());
-			response.sendRedirect("/book-store/");
-			return;
-		} else {
-			request.setAttribute("email", null);
-			
-			System.out.println("isLogin: " + null);
-		}
+		request.setAttribute("email", user != null ? user.getEmail() : null);
 
 //		validate input params
 		String email = request.getParameter("email");

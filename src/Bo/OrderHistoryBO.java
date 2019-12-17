@@ -23,4 +23,8 @@ public class OrderHistoryBO {
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<OrderHistoryBEAN> getOrderHistory(String userId) {
+		return dao.getOrderHistory(userId);
+	}
 }

@@ -7,6 +7,7 @@ public class OrderHistoryBEAN {
 	String userId;
 	String bookId;
 	int quantity;
+	String bookName;
 	Date date;
 	
 	public OrderHistoryBEAN(String userId, String bookId, int quantity, Date date) {
@@ -17,13 +18,22 @@ public class OrderHistoryBEAN {
 		this.date = date;
 	}
 
-	public OrderHistoryBEAN(long orderHistoryId, String userId, String bookId, int quantity, Date date) {
+	public OrderHistoryBEAN(long orderHistoryId, String bookId, int quantity, String bookName,
+			Date date) {
 		super();
 		this.orderHistoryId = orderHistoryId;
-		this.userId = userId;
 		this.bookId = bookId;
 		this.quantity = quantity;
+		this.bookName = bookName;
 		this.date = date;
+	}
+
+	public String getBookName() {
+		return bookName;
+	}
+
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
 	}
 
 	public long getOrderHistoryId() {
