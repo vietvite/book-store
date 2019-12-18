@@ -18,6 +18,7 @@ import Bean.BookBEAN;
 import Bean.UserBEAN;
 import Bo.BookBO;
 import Bo.CategoryBO;
+import Bo.OrderHistoryBO;
 
 /**
  * Servlet implementation class Manager
@@ -68,11 +69,40 @@ public class Manager extends HttpServlet {
 		case "submitaddbook":
 			addBook(request, response);
 			break;
+		case "pendingorder":
+			pendingOrder(request, response);
+			break;
+		case "acceptorder":
+			acceptOrder(request, response);
+			break;
 		
 		default:
 			directList(request, response);
 			return;
 		}
+	}
+
+	private void acceptOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher r;
+		r = request.getRequestDispatcher("pages/confirmCart.jsp");
+		OrderHistoryBO bo = new OrderHistoryBO();
+		String orderId = request.getParameter("orderId");
+		bo.acceptOrder(orderId);
+		request.setAttribute("lstOrder", bo.getPendingOrderHistory());
+
+		r.forward(request, response);
+	}
+
+	private void pendingOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher r;
+		r = request.getRequestDispatcher("pages/confirmCart.jsp");
+
+		HttpSession session = request.getSession();
+		UserBEAN user = session.getAttribute("user") != null ? (UserBEAN) session.getAttribute("user") : null;
+		OrderHistoryBO bo = new OrderHistoryBO();
+		request.setAttribute("lstOrder", bo.getPendingOrderHistory());
+
+		r.forward(request, response);
 	}
 
 	private void directToEditPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

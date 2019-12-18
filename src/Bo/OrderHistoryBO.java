@@ -27,4 +27,12 @@ public class OrderHistoryBO {
 	public ArrayList<OrderHistoryBEAN> getOrderHistory(String userId) {
 		return dao.getOrderHistory(userId);
 	}
+	
+	public ArrayList<OrderHistoryBEAN> getPendingOrderHistory() {
+		return dao.getPendingOrderHistory();
+	}
+	
+	public void acceptOrder(String orderId) {
+		dao.acceptOrder(orderId);
+	}
 }

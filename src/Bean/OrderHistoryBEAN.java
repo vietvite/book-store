@@ -9,6 +9,9 @@ public class OrderHistoryBEAN {
 	int quantity;
 	String bookName;
 	Date date;
+	boolean confirmedOrder;
+	long price;
+	String email;
 	
 	public OrderHistoryBEAN(String userId, String bookId, int quantity, Date date) {
 		super();
@@ -19,13 +22,51 @@ public class OrderHistoryBEAN {
 	}
 
 	public OrderHistoryBEAN(long orderHistoryId, String bookId, int quantity, String bookName,
-			Date date) {
+			Date date, boolean confirmedOrder, long price, String email) {
 		super();
 		this.orderHistoryId = orderHistoryId;
 		this.bookId = bookId;
 		this.quantity = quantity;
 		this.bookName = bookName;
 		this.date = date;
+		this.confirmedOrder = confirmedOrder;
+		this.price = price;
+		this.email = email;
+	}
+	public OrderHistoryBEAN(long orderHistoryId, String bookId, int quantity, String bookName,
+			Date date, boolean confirmedOrder, long price) {
+		super();
+		this.orderHistoryId = orderHistoryId;
+		this.bookId = bookId;
+		this.quantity = quantity;
+		this.bookName = bookName;
+		this.date = date;
+		this.confirmedOrder = confirmedOrder;
+		this.price = price;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public long getPrice() {
+		return price;
+	}
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
+	public boolean isConfirmedOrder() {
+		return confirmedOrder;
+	}
+
+	public void setConfirmedOrder(boolean confirmedOrder) {
+		this.confirmedOrder = confirmedOrder;
 	}
 
 	public String getBookName() {

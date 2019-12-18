@@ -35,6 +35,7 @@
 		    <% if(request.getAttribute("role") != null && request.getAttribute("role").equals("admin")) { %>
 		    	<a class="dropdown-item" href="/book-store/manager"><i class="fas fa-tasks"></i> Quản lý sách</a>
 		    	<a class="dropdown-item" href="/book-store/manager?op=addbook"><i class="fas fa-plus"></i> Thêm sách</a>
+		    	<a class="dropdown-item" href="/book-store/manager?op=pendingorder"><i class="fas fa-plus"></i> Xác nhận đặt hàng</a>
 		    <% } else { %>
 			    <a class="dropdown-item" href="/book-store/user?op=orderhistory"><i class="fas fa-history"></i> Lịch sử đặt hàng</a>
 		    <% } %>

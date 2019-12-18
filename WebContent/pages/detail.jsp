@@ -42,8 +42,8 @@
 	      <p class="text-danger font-weight-bold"><%= book.getPrice() %>đ</p>
 	      <!-- <label for="quantity">Số lượng:</label>
 	      <input type="text" name="quantity" id="quantity"> -->
-	      <button class="btn btn-sm btn-outline-danger mr-2"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
-	      <a href="cart?id=<%= book.getId() %>&bookname=<%= book.getBookName() %>&price=<%= book.getPrice() %>&imageUrl=<%= book.getImageUrl() %>"><button class="btn btn-sm btn-danger mx-1">Thanh toán</button></a>
+	      <!-- <button class="btn btn-sm btn-outline-danger mr-2"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button> -->
+	      <a href="cart?id=<%= book.getId() %>&bookname=<%= book.getBookName() %>&price=<%= book.getPrice() %>&imageUrl=<%= book.getImageUrl() %>"><button class="btn btn-sm btn-outline-danger mx-1"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button></a>
 	      <button class="btn btn-sm border-0" title="Yêu thích"><i class="fas fa-heart text-danger"></i></button>
 	    </div>
 	  </div>
